@@ -4,12 +4,13 @@ LABEL maintainer="Elliot Saba <staticfloat@gmail.com>, Valder Gallo <valergallo@
 EXPOSE 80
 EXPOSE 443
 
-# Do this apt/pip stuff all in one RUN command to avoid creating large
+# Do this apk/pip stuff all in one RUN command to avoid creating large
 # intermediate layers on non-squashable docker installs
 RUN apk update && \
     apk add --no-cache \
         python3 \
-        libffi && \
+        libffi \
+        coreutils && \
     apk add --no-cache --virtual .build-deps \
         python3-dev \
         libffi-dev \
