@@ -1,7 +1,6 @@
 FROM nginx:alpine
 LABEL maintainer="Elliot Saba <staticfloat@gmail.com>, Valder Gallo <valergallo@gmail.com>, Bruno Zell <bruno.zzell@gmail.com>"
 
-VOLUME /etc/letsencrypt
 EXPOSE 80
 EXPOSE 443
 
@@ -19,7 +18,8 @@ RUN apk update && \
         curl && \
     pip3 install --upgrade pip && \
     pip3 install -U cffi certbot && \
-    apk del .build-deps
+    apk del .build-deps && \
+    mkdir -p /etc/letsencrypt
 
 # Copy in scripts for certbot
 COPY ./scripts/ /scripts
